@@ -15,7 +15,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final List<Employee> employees = new ArrayList<>();
 
     @Override
-    public void addEmployee(Employee employee) {
+    public String addEmployee(Employee employee) {
         int MAX_EMPLOYEES = 10;
         if (employees.size() >= MAX_EMPLOYEES) {
             throw new EmployeeStorageIsFullException();
@@ -24,6 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeAlreadyAddedException();
         }
         employees.add(employee);
+        return "Сотрудник добавлен";
     }
 
     @Override
@@ -35,9 +36,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findEmployee(Employee employee) {
+    public String findEmployee(Employee employee) {
         if (employees.contains(employee)) {
-            return employee;
+            return employee + " пользователь найен";
         }
         throw new EmployeeNotFoundException();
 

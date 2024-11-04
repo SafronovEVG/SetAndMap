@@ -30,7 +30,7 @@ public class EmployeeController {
         } catch (EmployeeAlreadyAddedException e) {
             return "В списке уже есть этот сотрудникк";
         }
-        return employee + " Cоздан";
+        return employeeService.addEmployee(employee);
     }
 
     @GetMapping(path = "remove")
@@ -52,7 +52,7 @@ public class EmployeeController {
         } catch (EmployeeNotFoundException e) {
             return ("Пользователь не найден");
         }
-        return employee + " Найден";
+        return employeeService.findEmployee(employee);
     }
 
     @GetMapping(path = "all")

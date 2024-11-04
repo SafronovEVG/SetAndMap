@@ -4,11 +4,11 @@ import com.EVG32.Initializating.employye.book.domain.Employee;
 
 public interface EmployeeService {
 
-    void addEmployee(Employee employee);
+    String addEmployee(Employee employee);
 
     void removeEmployee(Employee employee);
 
-    Employee findEmployee(Employee employee);
+    String findEmployee(Employee employee);
 
     String printAllEmployees();
 }
