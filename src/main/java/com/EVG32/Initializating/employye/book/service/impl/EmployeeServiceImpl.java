@@ -38,14 +38,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee findEmployee(Employee employee) {
         if (employees.contains(employee)) {
             return employee;
-        } else {
-            throw new EmployeeNotFoundException();
         }
+        throw new EmployeeNotFoundException();
 
     }
 
     @Override
     public String printAllEmployees() {
-       return employees.toString();
+        return employees.toString();
     }
 }
