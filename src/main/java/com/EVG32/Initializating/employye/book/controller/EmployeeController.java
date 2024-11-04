@@ -50,7 +50,7 @@ public class EmployeeController {
         try {
             employeeService.findEmployee(employee);
         } catch (EmployeeNotFoundException e) {
-            return ("Пользователь не найден");
+            return "Пользователь не найден";
         }
         return employeeService.findEmployee(employee);
     }
