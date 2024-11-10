@@ -11,14 +11,6 @@ public class Employee {
         this.surname = surname;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
-    }
-
     public String getName() {
         return name;
     }
@@ -46,5 +38,13 @@ public class Employee {
         if (obj == null || getClass() != obj.getClass()) return false;
         Employee employee = (Employee) obj;
         return name.equals(employee.name) && surname.equals(employee.surname);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }

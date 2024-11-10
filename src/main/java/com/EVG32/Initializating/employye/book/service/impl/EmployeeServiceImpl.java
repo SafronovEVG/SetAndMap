@@ -12,40 +12,30 @@ import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+    private static final int MAX_EMPLOYEES = 10;
     private final List<Employee> employees = new ArrayList<>();
 
     @Override
     public String addEmployee(Employee employee) {
-        int MAX_EMPLOYEES = 10;
-        if (employees.size() >= MAX_EMPLOYEES) {
-            throw new EmployeeStorageIsFullException();
-        }
-        if (employees.contains(employee)) {
-            throw new EmployeeAlreadyAddedException();
-        }
+        if (employees.size() >= MAX_EMPLOYEES) throw new EmployeeStorageIsFullException();
+        if (employees.contains(employee)) throw new EmployeeAlreadyAddedException();
         employees.add(employee);
         return "Сотрудник добавлен";
     }
 
     @Override
     public void removeEmployee(Employee employee) {
-        if (employees.contains(employee)) {
-            throw new EmployeeNotFoundException();
-        }
-        employees.remove(employee);
+        if (!employees.remove(employee)) throw new EmployeeNotFoundException();
     }
 
     @Override
     public String findEmployee(Employee employee) {
-        if (employees.contains(employee)) {
-            return employee + " пользователь найен";
-        }
+        if (employees.contains(employee)) return employee + " пользователь найден";
         throw new EmployeeNotFoundException();
-
     }
 
     @Override
-    public String printAllEmployees() {
-        return employees.toString();
+    public List<Employee> findAllEmployees() {
+        return employees  ;
     }
 }

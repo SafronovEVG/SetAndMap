@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(path = "employee")
+@RequestMapping("/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -19,22 +21,20 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping(path = "add")
-    public String addEmployee(@RequestParam("name") String name,
-                              @RequestParam("surname") String surname) {
+    @GetMapping("/add")
+    public String addEmployee(@RequestParam String name, @RequestParam String surname) {
         Employee employee = new Employee(name, surname);
         try {
-            employeeService.addEmployee(employee);
+            return employeeService.addEmployee(employee);
         } catch (EmployeeStorageIsFullException e) {
             return "Достигнуто максимальное количество сотрудников";
         } catch (EmployeeAlreadyAddedException e) {
             return "В списке уже есть этот сотрудникк";
         }
-        return employeeService.addEmployee(employee);
     }
 
-    @GetMapping(path = "remove")
-    public String removeEmployee(@RequestParam("name") String name, @RequestParam("surname") String surname) {
+    @GetMapping("/remove")
+    public String removeEmployee(@RequestParam String name, @RequestParam String surname) {
         Employee employee = new Employee(name, surname);
         try {
             employeeService.removeEmployee(employee);
@@ -44,8 +44,8 @@ public class EmployeeController {
         return employee + " Пользователь удален";
     }
 
-    @GetMapping(path = "find")
-    public String findEmployee(@RequestParam("name") String name, @RequestParam("surname") String surname) {
+    @GetMapping("/find")
+    public String findEmployee(@RequestParam String name, @RequestParam String surname) {
         Employee employee = new Employee(name, surname);
         try {
             employeeService.findEmployee(employee);
@@ -55,8 +55,8 @@ public class EmployeeController {
         return employeeService.findEmployee(employee);
     }
 
-    @GetMapping(path = "all")
-    public String all() {
-        return employeeService.printAllEmployees();
+    @GetMapping("/all")
+    public List<Employee> all() {
+        return employeeService.findAllEmployees();
     }
 }
